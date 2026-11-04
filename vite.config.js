@@ -4,5 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  server: { port: 5173 },
+  // 5173 lo usa el portafolio (con el admin); así ambos corren a la vez contra la misma API
+  server: { port: 5174, strictPort: true },
 })
