@@ -8,7 +8,7 @@ Stack: React 18, Vite, React Router, Tailwind CSS v4, lucide-react, react-helmet
 ```bash
 npm install
 cp .env.example .env      # y completa tus datos
-npm run dev               # http://localhost:5173
+npm run dev               # http://localhost:5174
 npm run build             # genera /dist para publicar
 ```
 
@@ -53,7 +53,8 @@ router.get('/projects', async (req, res) => {
 })
 ```
 
-Recuerda habilitar CORS en la API para el dominio de esta web (y `http://localhost:5173` en desarrollo).
+Recuerda habilitar CORS en la API para el dominio de esta web (y `http://localhost:5174` en desarrollo,
+en `CORS_ORIGINS` del backend). El puerto 5173 lo usa el portafolio.
 
 ## Campos que usa el frontend
 
