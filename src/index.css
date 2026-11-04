@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #06060a;
+  --color-surface: #0c0f14;
+  --color-surface-2: #11151c;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-accent: #2ec4a0;
+  --color-accent-strong: #1fa384;
+  --color-ink: #eceff3;
+  --color-muted: #9aa3ad;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-6xl px-5 md:px-8;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-bg transition hover:bg-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-lg border border-line px-5 py-3 text-sm font-medium text-ink transition hover:border-accent hover:text-accent;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+  }
+  .input {
+    @apply w-full rounded-lg border border-line bg-surface-2 px-4 py-3 text-sm text-ink placeholder:text-muted/70 outline-none transition focus:border-accent;
+  }
+}
