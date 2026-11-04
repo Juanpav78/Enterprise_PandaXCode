@@ -86,7 +86,8 @@ Valida también en el backend (nombre, correo, mensaje y `consent === true`).
 
 ## Pendientes antes de publicar
 
-- [ ] Poner tu logo en `public/logo.svg`, la imagen del hero en `public/hero.webp` y la foto en `public/nosotros.webp`
+- [x] Logo del panda en `public/logo.svg` y favicon
+- [ ] Poner la imagen del hero en `public/hero.webp` y la foto en `public/nosotros.webp`
 - [ ] Completar los datos entre `[ ]` en `src/pages/Privacy.jsx`
 - [ ] Escribir tu historia en `src/pages/About.jsx`
 - [ ] Completar el `.env` (API, WhatsApp, correo, Instagram, enlace a la tienda)

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Instagram, Mail, MessageCircle } from 'lucide-react'
+import { Instagram, Mail, MessageCircle, Youtube } from 'lucide-react'
 import { config, whatsappLink } from '../config'
 import Logo from './Logo'
 
@@ -43,6 +43,11 @@ export default function Footer() {
             <li>
               <a className="flex items-center gap-2 hover:text-accent" href={config.instagram} target="_blank" rel="noreferrer">
                 <Instagram size={16} /> Instagram
+              </a>
+            </li>
+            <li>
+              <a className="flex items-center gap-2 hover:text-accent" href={config.youtube} target="_blank" rel="noreferrer">
+                <Youtube size={16} /> YouTube
               </a>
             </li>
           </ul>

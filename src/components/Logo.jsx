@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-// Pon tu logo en /public/logo.svg (o .png y cambia la ruta). Si no existe, se muestra solo el texto.
+// Logo del panda de PandaX en /public/logo.svg (versión blanca, para el fondo oscuro del sitio).
+// Si el archivo faltara, se muestra sólo el texto para que la marca nunca quede vacía.
 export default function Logo({ className = '' }) {
   const [hasImg, setHasImg] = useState(true)
 
@@ -9,7 +10,7 @@ export default function Logo({ className = '' }) {
       {hasImg && (
         <img src="/logo.svg" alt="" className="h-8 w-auto" onError={() => setHasImg(false)} />
       )}
-      <span className="text-xl font-medium tracking-tight text-ink">PandaX Code</span>
+      <span className="text-xl font-medium tracking-tight text-ink">PandaX <span className="text-accent">Code</span></span>
     </span>
   )
 }

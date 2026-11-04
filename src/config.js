@@ -4,7 +4,8 @@ export const config = {
   site: import.meta.env.VITE_SITE || 'code',
   whatsapp: import.meta.env.VITE_WHATSAPP || '',
   email: import.meta.env.VITE_EMAIL || 'contacto@tudominio.com',
-  instagram: import.meta.env.VITE_INSTAGRAM || '#',
+  instagram: import.meta.env.VITE_INSTAGRAM || 'https://www.instagram.com/pandaxcode/',
+  youtube: import.meta.env.VITE_YOUTUBE || 'https://www.youtube.com/@pandaxcode9228',
   tiendaUrl: import.meta.env.VITE_TIENDA_URL || '#',
   brand: 'PandaX Code',
 }
