@@ -6,6 +6,7 @@ import ServicesGrid from '../components/ServicesGrid'
 import ProjectsGrid from '../components/ProjectsGrid'
 import CtaBand from '../components/CtaBand'
 import Testimonials from '../components/Testimonials'
+import HeroVisual from '../components/HeroVisual'
 
 const pillars = [
   { icon: PenTool, title: 'Diseño estratégico', text: 'Interfaces que comunican y conectan.' },
@@ -49,15 +50,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Reemplaza este bloque por tu imagen del hero (laptop + celular) */}
-          <div className="card aspect-[4/3] overflow-hidden">
-            <img
-              src="/hero.webp"
-              alt="Proyectos de PandaX Code en laptop y celular"
-              className="h-full w-full object-cover"
-              onError={(e) => (e.currentTarget.style.display = 'none')}
-            />
-          </div>
+          {/* Mockup con los proyectos destacados de la API. Para usar una imagen propia, basta con
+              poner public/hero.webp: HeroVisual la detecta y la muestra en su lugar. */}
+          <HeroVisual />
         </div>
 
         <div className="container-px pb-10">
