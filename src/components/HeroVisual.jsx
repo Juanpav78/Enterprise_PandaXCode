@@ -78,9 +78,14 @@ export default function HeroVisual() {
   }
 
   const actual = activa % Math.max(portadas.length, 1)
-  // El celular muestra el siguiente proyecto para que se vean dos trabajos a la vez
-  const enCelular = portadas.length > 1 ? (actual + 1) % portadas.length : actual
   const proyecto = proyectos[actual]
+  // El celular enseña la versión móvil (captura subida aparte en el admin). Una captura de
+  // escritorio recortada a lo alto no representa el diseño responsive, así que si el proyecto
+  // actual no la tiene se usa la de otro proyecto que sí, y si ninguno, una pantalla esquemática.
+  const capturasMoviles = proyectos.map((p) => p.mobileCover).filter(Boolean)
+  const movilActual = proyecto?.mobileCover
+    ? capturasMoviles.indexOf(proyecto.mobileCover)
+    : activa % Math.max(capturasMoviles.length, 1)
 
   return (
     <div className="relative mx-auto w-full max-w-xl pb-10 lg:pb-14" aria-label="Proyectos recientes de PandaX Code">
@@ -106,7 +111,7 @@ export default function HeroVisual() {
       <div className="absolute right-[-0.5rem] bottom-0 w-[26%] min-w-24 rounded-[1.4rem] border border-line bg-bg p-1.5 shadow-2xl shadow-black/60 sm:right-[-1.5rem]">
         <div className="mx-auto mb-1 h-1 w-8 rounded-full bg-ink/20" />
         <div className="aspect-[9/19] overflow-hidden rounded-[1rem] bg-surface-2">
-          <Pantalla portadas={portadas} activa={enCelular} ancho={400} alt="" compacta />
+          <Pantalla portadas={capturasMoviles} activa={movilActual} ancho={400} alt="" compacta />
         </div>
       </div>
 
