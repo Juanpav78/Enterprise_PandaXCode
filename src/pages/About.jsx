@@ -1,6 +1,7 @@
 import Seo from '../components/Seo'
 import SectionHeader from '../components/SectionHeader'
 import CtaBand from '../components/CtaBand'
+import NosotrosVisual from '../components/NosotrosVisual'
 
 const values = [
   { title: 'Cercanía', text: 'Hablas directamente con quien diseña y desarrolla tu proyecto.' },
@@ -26,14 +27,7 @@ export default function About() {
             publicación y el mantenimiento.
           </p>
         </div>
-        <div className="card aspect-square overflow-hidden">
-          <img
-            src="/nosotros.webp"
-            alt="Equipo de PandaX Code"
-            className="h-full w-full object-cover"
-            onError={(e) => (e.currentTarget.style.display = 'none')}
-          />
-        </div>
+        <NosotrosVisual />
       </section>
 
       <section className="container-px mt-20 grid gap-5 md:grid-cols-3">
