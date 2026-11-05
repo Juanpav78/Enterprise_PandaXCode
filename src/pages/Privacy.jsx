@@ -1,10 +1,12 @@
 import Seo from '../components/Seo'
 import { config } from '../config'
 
-// PLANTILLA BASE. Completa los datos entre [ ] y revísala antes de publicar.
-const RESPONSABLE = '[Tu nombre completo]'
-const DOCUMENTO = '[Tu cédula / NIT]'
-const CIUDAD = '[Tu ciudad]'
+// Datos del responsable del tratamiento (Ley 1581 de 2012). Si cambian (p. ej. al constituir
+// la empresa con NIT), actualízalos aquí junto con la fecha de actualización.
+const RESPONSABLE = 'Juan Pablo Alvarado Valero'
+const DOCUMENTO = 'cédula de ciudadanía n.º 1.127.623.037'
+const CIUDAD = 'Bogotá D.C.'
+const ACTUALIZACION = '5 de noviembre de 2026'
 
 export default function Privacy() {
   return (
@@ -12,7 +14,7 @@ export default function Privacy() {
       <Seo title="Política de privacidad" />
       <article className="container-px max-w-3xl pt-20 text-sm leading-relaxed text-muted">
         <h1 className="text-3xl font-semibold text-ink">Política de tratamiento de datos personales</h1>
-        <p className="mt-2">Última actualización: [fecha]</p>
+        <p className="mt-2">Última actualización: {ACTUALIZACION}</p>
 
         <h2 className="mt-8 text-lg font-semibold text-ink">1. Responsable</h2>
         <p className="mt-2">
