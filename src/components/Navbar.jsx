@@ -22,15 +22,18 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur">
-      <div className="border-b border-line/60 text-xs text-muted">
-        <div className="container-px flex h-8 items-center gap-2">
-          <span className="text-ink">PandaX Code</span>
-          <span className="text-line">|</span>
-          <a href={config.tiendaUrl} className="transition hover:text-accent">
-            PandaX Tech
-          </a>
+      {/* Barra hacia la tienda PandaX Tech: sólo aparece cuando VITE_TIENDA_URL tiene un enlace real */}
+      {config.tiendaUrl && (
+        <div className="border-b border-line/60 text-xs text-muted">
+          <div className="container-px flex h-8 items-center gap-2">
+            <span className="text-ink">PandaX Code</span>
+            <span className="text-line">|</span>
+            <a href={config.tiendaUrl} className="transition hover:text-accent">
+              PandaX Tech
+            </a>
+          </div>
         </div>
-      </div>
+      )}
 
       <nav className="container-px flex h-16 items-center justify-between" aria-label="Principal">
         <Link to="/" aria-label="Inicio">
