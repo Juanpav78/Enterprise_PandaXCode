@@ -90,7 +90,8 @@ export default function Home() {
                   <Icon size={20} />
                 </span>
                 <div>
-                  <h3 className="text-sm font-semibold">{title}</h3>
+                  {/* Es una etiqueta, no un título: un h3 aquí saltaría del h1 sin pasar por un h2 */}
+                  <p className="text-sm font-semibold">{title}</p>
                   <p className="mt-1 text-sm text-muted">{text}</p>
                 </div>
               </div>

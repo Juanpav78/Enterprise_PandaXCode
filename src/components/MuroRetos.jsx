@@ -5,7 +5,6 @@ import PandaPixel from './PandaPixel'
 import Reveal from './Reveal'
 
 // Alturas de las casillas vacías: variadas para que el muro se lea como un tablero tipo
-
 // Pinterest incluso antes de tener contenido. En móvil, más bajas: las columnas son estrechas.
 const ALTURAS = [
   'h-40 sm:h-56', 'h-52 sm:h-72', 'h-32 sm:h-44', 'h-44 sm:h-64', 'h-36 sm:h-52',
@@ -83,15 +82,15 @@ export default function MuroRetos({ minimo = 6 }) {
         </p>
         <div className="flex flex-wrap gap-3">
           {GENERADOR_URL && (
-            <a href={GENERADOR_URL} target="_blank" rel="noreferrer" className="btn-primary !py-2">
+            <a href={GENERADOR_URL} target="_blank" rel="noreferrer" className="btn-primary py-2!">
               <Shuffle size={16} /> Generar una temática
             </a>
           )}
-          <a href={config.instagram} target="_blank" rel="noreferrer" className="btn-ghost !py-2">Instagram</a>
+          <a href={config.instagram} target="_blank" rel="noreferrer" className="btn-ghost py-2!">Instagram</a>
           {config.tiktok && (
-            <a href={config.tiktok} target="_blank" rel="noreferrer" className="btn-ghost !py-2">TikTok</a>
+            <a href={config.tiktok} target="_blank" rel="noreferrer" className="btn-ghost py-2!">TikTok</a>
           )}
-          <a href={config.youtube} target="_blank" rel="noreferrer" className="btn-ghost !py-2">YouTube</a>
+          <a href={config.youtube} target="_blank" rel="noreferrer" className="btn-ghost py-2!">YouTube</a>
         </div>
       </div>
 

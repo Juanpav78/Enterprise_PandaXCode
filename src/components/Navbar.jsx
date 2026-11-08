@@ -69,7 +69,7 @@ export default function Navbar() {
       )}
 
       <nav className="container-px flex h-16 items-center justify-between" aria-label="Principal">
-        <Link to="/" aria-label="Inicio">
+        <Link to="/" aria-label="PandaX Code, ir al inicio">
           <Logo />
         </Link>
 

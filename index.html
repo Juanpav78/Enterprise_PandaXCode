@@ -17,8 +17,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Sólo los pesos que usa la web: Space Grotesk para títulos, Inter para texto,
          JetBrains Mono para etiquetas técnicas y Silkscreen para las etiquetas pixel de Retos -->
+    <!-- Se carga sin bloquear el primer pintado: mientras llega, el texto sale con la fuente
+         del sistema (display=swap) en vez de dejar la pantalla en blanco -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Silkscreen&family=Space+Grotesk:wght@600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Silkscreen&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Silkscreen&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Silkscreen&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" /></noscript>
   </head>
   <body>
     <div id="root"></div>
