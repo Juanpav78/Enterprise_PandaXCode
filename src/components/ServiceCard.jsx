@@ -34,7 +34,7 @@ export default function ServiceCard({ service }) {
   return (
     <article className="card group flex flex-col overflow-hidden transition hover:border-accent/40">
       <div className="flex flex-1 flex-col p-6">
-        <span className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-surface-2 text-accent">
+        <span className="icon-box">
           <Icon size={20} />
         </span>
         <h3 className="mt-5 text-lg font-semibold">{service.title}</h3>

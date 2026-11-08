@@ -1,3 +1,4 @@
+import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import SectionHeader from '../components/SectionHeader'
 import CtaBand from '../components/CtaBand'
@@ -13,7 +14,7 @@ export default function About() {
   return (
     <>
       <Seo title="Nosotros" description="Conoce quién está detrás de PandaX Code." />
-      <section className="container-px grid items-center gap-12 pt-20 md:grid-cols-2">
+      <Reveal as="section" className="container-px grid items-center gap-12 pt-20 md:grid-cols-2">
         <div>
           <SectionHeader eyebrow="Nosotros" title="Detrás de" highlight="PandaX Code" center={false} />
           {/* Cuenta aquí tu historia: quién eres, por qué empezaste y cómo trabajas */}
@@ -28,16 +29,16 @@ export default function About() {
           </p>
         </div>
         <NosotrosVisual />
-      </section>
+      </Reveal>
 
-      <section className="container-px mt-20 grid gap-5 md:grid-cols-3">
+      <Reveal as="section" className="container-px mt-20 grid gap-5 md:grid-cols-3">
         {values.map((v) => (
           <div key={v.title} className="card p-6">
             <h3 className="font-semibold text-accent">{v.title}</h3>
             <p className="mt-2 text-sm text-muted">{v.text}</p>
           </div>
         ))}
-      </section>
+      </Reveal>
 
       <CtaBand />
     </>

@@ -1,15 +1,51 @@
 @import "tailwindcss";
 
-@theme {
-  --color-bg: #06060a;
-  --color-surface: #0c0f14;
-  --color-surface-2: #11151c;
-  --color-line: rgba(255, 255, 255, 0.08);
-  --color-accent: #2ec4a0;
-  --color-accent-strong: #1fa384;
-  --color-ink: #eceff3;
-  --color-muted: #9aa3ad;
+/* ---------- Identidad de marca ----------
+   Fuente única de los colores. Las clases de Tailwind (bg-accent, text-muted…) apuntan a estas
+   variables mediante @theme inline, así que cambiar un valor aquí cambia toda la web. */
+:root {
+  --surface: #06060a;        /* fondo */
+  --surface-raised: #11161a; /* tarjetas, ventanas */
+  --line: #222c30;           /* bordes 1px */
+  --ink: #eceff3;            /* texto principal */
+  --ink-muted: #9fb0b0;      /* texto secundario */
+  --menta: #2ec4a0;          /* color de marca: botones, palabra destacada */
+  --on-menta: #06060a;       /* texto sobre menta. NUNCA blanco sobre menta */
+  --menta-soft: #0f2f29;     /* chips, fondos de íconos, resaltados */
+  --turquesa: #16a6a6;       /* segundo acento, mejillas de la mascota */
+  --nieve: #f2f7f5;          /* cara de la mascota */
+  --bosque: #0b4f4a;         /* orejas de la mascota */
+
+  --ease-salida: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@theme inline {
+  --color-bg: var(--surface);
+  --color-surface: var(--surface-raised);
+  --color-surface-2: var(--surface-raised);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--ink-muted);
+  --color-accent: var(--menta);
+  /* Sólo lo usa el botón flotante de WhatsApp, que se conserva tal cual */
+  --color-accent-strong: color-mix(in srgb, var(--menta) 82%, black);
+  --color-on-accent: var(--on-menta);
+  --color-menta-soft: var(--menta-soft);
+  --color-turquesa: var(--turquesa);
+  --color-nieve: var(--nieve);
+  --color-bosque: var(--bosque);
+
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+  --font-pixel: "Silkscreen", "JetBrains Mono", monospace;
+}
+
+/* Esquinas pequeñas, angulares como el logo. Van en @theme (no inline) para que existan también
+   como variables --radius-sm / --radius-md en :root. */
+@theme {
+  --radius-sm: 4px;
+  --radius-md: 8px;
 }
 
 html {
@@ -20,9 +56,19 @@ body {
   @apply bg-bg text-ink font-sans antialiased;
 }
 
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-bg);
+  background: var(--menta);
+  color: var(--on-menta);
+}
+
+/* Foco visible y consistente en todo lo interactivo (sólo con teclado, no al hacer clic) */
+:focus-visible {
+  outline: 2px solid var(--menta);
+  outline-offset: 2px;
 }
 
 @layer components {
@@ -30,20 +76,64 @@ body {
     @apply mx-auto w-full max-w-6xl px-5 md:px-8;
   }
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-bg transition hover:bg-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    @apply relative inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent;
   }
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-lg border border-line px-5 py-3 text-sm font-medium text-ink transition hover:border-accent hover:text-accent;
+    @apply inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent;
   }
   .card {
-    @apply rounded-2xl border border-line bg-surface;
+    @apply rounded-md border border-line bg-surface;
   }
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+    @apply font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-sm bg-menta-soft px-2.5 py-1 font-mono text-[0.7rem] font-medium uppercase tracking-wider text-accent;
+  }
+  .icon-box {
+    @apply grid h-11 w-11 shrink-0 place-items-center rounded-md bg-menta-soft text-accent;
   }
   .input {
-    @apply w-full rounded-lg border border-line bg-surface-2 px-4 py-3 text-sm text-ink placeholder:text-muted/70 outline-none transition focus:border-accent;
+    @apply w-full rounded-md border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-muted/70 outline-none transition-colors focus:border-accent;
   }
+}
+
+/* ---------- Botón principal ----------
+   El brillo es un pseudo-elemento que sólo cambia de opacidad y la flecha sólo se desplaza:
+   así la animación se queda en transform/opacity y no fuerza repintados. */
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 22px -2px rgb(46 196 160 / 0.55);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.btn-primary svg {
+  transition: transform 0.25s var(--ease-salida);
+}
+.btn-primary:hover::after,
+.btn-primary:focus-visible::after {
+  opacity: 1;
+}
+.btn-primary:hover svg,
+.btn-primary:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
+/* ---------- Aparición al hacer scroll (componente Reveal) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s var(--ease-salida),
+    transform 0.5s var(--ease-salida);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* ---------- Ilustración de "Nosotros" (NosotrosVisual) ---------- */
@@ -57,15 +147,24 @@ body {
 @keyframes nv-flotar { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
 @keyframes nv-aparecer { from { opacity: 0; transform: translateX(-6px) } to { opacity: 1; transform: none } }
 @keyframes nv-parpadeo { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
-/* Sólo escala: el centrado lo hace la propiedad translate de Tailwind, que no se toca */
-@keyframes nv-latir { 0%, 100% { opacity: 0.55; transform: scale(1) } 50% { opacity: 0.9; transform: scale(1.08) } }
 .nv-flota { animation: nv-flotar 5s ease-in-out infinite; }
 .nv-flota-lenta { animation: nv-flotar 7s ease-in-out infinite 1s; }
 .nv-linea { opacity: 0; animation: nv-aparecer 0.5s ease-out forwards; }
 .nv-cursor { animation: nv-parpadeo 1s step-end infinite; }
-.nv-halo { animation: nv-latir 6s ease-in-out infinite; }
-/* Quien pide menos movimiento ve la ilustración completa y quieta */
+
+/* ---------- Menos movimiento ----------
+   Quien lo pide ve directamente el estado final de todo: sin transiciones, sin animaciones y
+   sin elementos esperando a "aparecer". Lo que se anima con JavaScript lo comprueba aparte. */
 @media (prefers-reduced-motion: reduce) {
-  .nv-flota, .nv-flota-lenta, .nv-cursor, .nv-halo { animation: none; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .nv-flota, .nv-flota-lenta, .nv-cursor { animation: none; }
   .nv-linea { animation: none; opacity: 1; }
 }

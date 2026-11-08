@@ -19,7 +19,7 @@ export default function ProjectCard({ project, onOpen }) {
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="grid h-full place-items-center bg-gradient-to-br from-surface-2 to-accent/20 text-3xl font-semibold tracking-tight">
+          <div className="grid h-full place-items-center bg-menta-soft font-display text-3xl font-bold tracking-tight">
             {project.title}
           </div>
         )}

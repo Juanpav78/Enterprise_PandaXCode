@@ -1,3 +1,4 @@
+import Reveal from './Reveal'
 import { Quote } from 'lucide-react'
 import { api } from '../api/client'
 import { useApi } from '../hooks/useApi'
@@ -11,7 +12,7 @@ export default function Testimonials() {
   if (!data?.length) return null
 
   return (
-    <section className="container-px mt-24">
+    <Reveal as="section" className="container-px mt-24">
       <SectionHeader eyebrow="Testimonios" title="Lo que dicen" highlight="nuestros clientes" />
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {data.slice(0, 3).map((t) => (
@@ -25,6 +26,6 @@ export default function Testimonials() {
           </figure>
         ))}
       </div>
-    </section>
+    </Reveal>
   )
 }

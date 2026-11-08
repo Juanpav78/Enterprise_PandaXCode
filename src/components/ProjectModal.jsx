@@ -35,7 +35,7 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/75 p-3 backdrop-blur-sm sm:p-6"
+      className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/85 p-3 sm:p-6"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -45,7 +45,7 @@ export default function ProjectModal({ project, onClose }) {
       <button
         onClick={onClose}
         aria-label="Cerrar"
-        className="fixed right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-line bg-surface-2/90 backdrop-blur transition hover:border-accent sm:right-6 sm:top-6"
+        className="fixed right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-md border border-line bg-surface transition-colors hover:border-accent sm:right-6 sm:top-6"
       >
         <X size={18} />
       </button>
@@ -56,21 +56,21 @@ export default function ProjectModal({ project, onClose }) {
           {images.length ? (
             <img src={images[index]} alt={`${project.title} ${index + 1}`} className="h-full w-full object-cover object-top" />
           ) : (
-            <div className="grid h-full place-items-center bg-gradient-to-br from-surface-2 to-accent/20 text-4xl font-semibold">
+            <div className="grid h-full place-items-center bg-menta-soft font-display text-4xl font-bold">
               {project.title}
             </div>
           )}
           {images.length > 1 && (
             <>
               <button onClick={prev} aria-label="Imagen anterior"
-                className="absolute left-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-line bg-bg/70 backdrop-blur transition hover:border-accent">
+                className="absolute left-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-md border border-line bg-bg/90 transition-colors hover:border-accent">
                 <ChevronLeft size={18} />
               </button>
               <button onClick={next} aria-label="Imagen siguiente"
-                className="absolute right-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-line bg-bg/70 backdrop-blur transition hover:border-accent">
+                className="absolute right-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-md border border-line bg-bg/90 transition-colors hover:border-accent">
                 <ChevronRight size={18} />
               </button>
-              <span className="absolute bottom-3 right-3 rounded-full bg-bg/70 px-2.5 py-1 text-xs text-muted backdrop-blur">
+              <span className="absolute bottom-3 right-3 rounded-sm bg-bg/90 px-2.5 py-1 font-mono text-xs text-muted">
                 {index + 1} / {images.length}
               </span>
             </>
@@ -84,7 +84,7 @@ export default function ProjectModal({ project, onClose }) {
                 key={src}
                 onClick={() => setIndex(i)}
                 aria-label={`Ver imagen ${i + 1}`}
-                className={`h-12 w-20 shrink-0 overflow-hidden rounded-md border transition ${i === index ? 'border-accent' : 'border-line opacity-60 hover:opacity-100'}`}
+                className={`h-12 w-20 shrink-0 overflow-hidden rounded-sm border transition ${i === index ? 'border-accent' : 'border-line opacity-60 hover:opacity-100'}`}
               >
                 <img src={src} alt="" className="h-full w-full object-cover object-top" />
               </button>
@@ -96,7 +96,7 @@ export default function ProjectModal({ project, onClose }) {
         <div className="p-5 md:p-8">
           <div className="flex flex-wrap items-center gap-2">
             {project.category && (
-              <span className="rounded-md border border-line px-3 py-1 text-xs uppercase tracking-wider text-accent">
+              <span className="chip">
                 {project.category}
               </span>
             )}
@@ -130,10 +130,10 @@ export default function ProjectModal({ project, onClose }) {
 
           {project.highlights?.length > 0 && (
             <div className="mt-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-accent">Highlights</p>
+              <p className="eyebrow">Highlights</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {project.highlights.map((h) => (
-                  <span key={h} className="flex items-center gap-1.5 rounded-lg border border-line bg-surface-2 px-3 py-2 text-xs">
+                  <span key={h} className="flex items-center gap-1.5 rounded-sm border border-line bg-bg px-3 py-2 text-xs">
                     <Sparkles size={13} className="text-accent" /> {h}
                   </span>
                 ))}
@@ -143,10 +143,10 @@ export default function ProjectModal({ project, onClose }) {
 
           {project.technologies?.length > 0 && (
             <div className="mt-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-accent">Tecnologías</p>
+              <p className="eyebrow">Tecnologías</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {project.technologies.map((t) => (
-                  <span key={t} className="rounded-md border border-line px-2.5 py-1 text-xs text-muted">
+                  <span key={t} className="rounded-sm border border-line px-2.5 py-1 font-mono text-xs text-muted">
                     {t}
                   </span>
                 ))}
@@ -156,7 +156,7 @@ export default function ProjectModal({ project, onClose }) {
 
           {/* Una app interna no se puede visitar: se explica en lugar de mostrar un botón sin destino */}
           {project.internal && (
-            <div className="mt-8 flex items-start gap-3 rounded-xl border border-line bg-surface-2 p-4 text-sm">
+            <div className="mt-8 flex items-start gap-3 rounded-md border border-line bg-bg p-4 text-sm">
               <Lock size={18} className="mt-0.5 shrink-0 text-accent" />
               <p className="text-muted">
                 <span className="font-semibold text-ink">Aplicación interna.</span> Es un sistema de uso privado del

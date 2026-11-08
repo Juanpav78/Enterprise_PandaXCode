@@ -1,3 +1,4 @@
+import Reveal from '../components/Reveal'
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { CheckCircle2, Mail, MessageCircle, Send } from 'lucide-react'
@@ -66,7 +67,7 @@ export default function Contact() {
   return (
     <>
       <Seo title="Contacto" description="Cotiza tu página web con PandaX Code. Respondemos en menos de 24 horas." />
-      <section className="container-px grid gap-12 pt-20 lg:grid-cols-5">
+      <Reveal as="section" className="container-px grid gap-12 pt-20 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <SectionHeader
             eyebrow="Contacto"
@@ -77,14 +78,14 @@ export default function Contact() {
           />
           <div className="mt-8 space-y-4">
             <a href={whatsappLink()} target="_blank" rel="noreferrer" className="card flex items-center gap-4 p-5 transition hover:border-accent/40">
-              <MessageCircle className="text-accent" />
+              <span className="icon-box"><MessageCircle size={20} /></span>
               <div>
                 <p className="font-semibold">WhatsApp</p>
                 <p className="text-sm text-muted">La forma más rápida de hablar con nosotros</p>
               </div>
             </a>
             <a href={`mailto:${config.email}`} className="card flex items-center gap-4 p-5 transition hover:border-accent/40">
-              <Mail className="text-accent" />
+              <span className="icon-box"><Mail size={20} /></span>
               <div>
                 <p className="font-semibold">Correo</p>
                 <p className="text-sm text-muted">{config.email}</p>
@@ -173,7 +174,7 @@ export default function Contact() {
             </form>
           )}
         </div>
-      </section>
+      </Reveal>
     </>
   )
 }

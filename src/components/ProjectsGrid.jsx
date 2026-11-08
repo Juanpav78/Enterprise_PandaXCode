@@ -36,8 +36,8 @@ export default function ProjectsGrid({ limit, featured = false, filters = false 
             <button
               key={c}
               onClick={() => setCategory(c)}
-              className={`rounded-full border px-4 py-1.5 text-sm transition ${
-                c === category ? 'border-accent bg-accent/10 text-accent' : 'border-line text-muted hover:text-ink'
+              className={`rounded-sm border px-4 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors ${
+                c === category ? 'border-accent/40 bg-menta-soft text-accent' : 'border-line text-muted hover:text-ink'
               }`}
             >
               {c}
