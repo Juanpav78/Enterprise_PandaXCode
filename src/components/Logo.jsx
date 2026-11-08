@@ -10,7 +10,7 @@ export default function Logo({ className = '' }) {
       {hasImg && (
         <img src="/logo.svg" alt="" className="h-8 w-auto" onError={() => setHasImg(false)} />
       )}
-      <span className="text-xl font-medium tracking-tight text-ink">PandaX <span className="text-accent">Code</span></span>
+      <span className="font-display text-xl font-semibold tracking-tight text-ink">PandaX <span className="text-accent">Code</span></span>
     </span>
   )
 }

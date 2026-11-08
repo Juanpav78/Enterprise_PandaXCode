@@ -7,6 +7,22 @@ import ProjectsGrid from '../components/ProjectsGrid'
 import CtaBand from '../components/CtaBand'
 import Testimonials from '../components/Testimonials'
 import HeroVisual from '../components/HeroVisual'
+import FirmaPixel from '../components/FirmaPixel'
+import TitularAnimado from '../components/TitularAnimado'
+import Reveal from '../components/Reveal'
+import FotoFundador from '../components/FotoFundador'
+import MuroRetos from '../components/MuroRetos'
+import { BordePixel, EsquinaPixel } from '../components/Pixeles'
+
+// Opciones que se barajaron para el titular:
+//  - "Tu negocio merece una web que se recuerde."
+//  - "Diseño y código para webs que trabajan por tu negocio."
+// Se eligió esta por concreta: dice qué consigue el cliente (vender) y cuál es el diferencial.
+const titular = [
+  { texto: 'Webs que' },
+  { texto: 'venden,', destacado: true },
+  { texto: 'hechas con criterio de diseño.' },
+]
 
 const pillars = [
   { icon: PenTool, title: 'Diseño estratégico', text: 'Interfaces que comunican y conectan.' },
@@ -29,16 +45,22 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
-        <div className="container-px relative grid items-center gap-12 py-20 md:grid-cols-2 md:py-28">
+        <div aria-hidden className="hero-puntos pointer-events-none absolute inset-0" />
+        <div className="container-px relative grid items-center gap-14 pt-14 pb-20 md:grid-cols-2 md:pt-20 md:pb-24">
           <div>
             <p className="eyebrow">Diseño · Desarrollo · Experiencia</p>
-            <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight md:text-6xl">
-              Experiencias digitales que <span className="text-accent">elevan marcas.</span>
-            </h1>
+            <TitularAnimado
+              partes={titular}
+              className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
+            />
             <p className="mt-6 max-w-lg text-lg text-muted">
               Diseñamos y desarrollamos sitios web modernos, rápidos y memorables que conectan con tus usuarios y
               hacen crecer tu negocio.
+            </p>
+            {/* Presentación en primera persona: la marca es PandaX Code, pero hay alguien detrás */}
+            <p className="mt-5 max-w-lg border-l-2 border-accent pl-4 text-sm leading-relaxed text-ink/85">
+              Soy <span className="font-semibold text-ink">Juan Alvarado</span>, diseñador y desarrollador web en
+              Colombia. Trabajas directamente conmigo, de la idea al lanzamiento.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link to="/contacto" className="btn-primary">
@@ -50,30 +72,41 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mockup con los proyectos destacados de la API. Para usar una imagen propia, basta con
-              poner public/hero.webp: HeroVisual la detecta y la muestra en su lugar. */}
-          <HeroVisual />
+          <div className="relative">
+            {/* Firma pixel detrás del mockup; se extiende hasta el borde derecho de la pantalla */}
+            <FirmaPixel className="absolute -top-10 -bottom-6 -left-14 -right-[50vw]" />
+            {/* Mockup con los proyectos destacados de la API. Para usar una imagen propia, basta con
+                poner public/hero.webp: HeroVisual la detecta y la muestra en su lugar. */}
+            <div className="relative">
+              <HeroVisual />
+            </div>
+          </div>
         </div>
 
-        <div className="container-px pb-10">
+        <Reveal className="container-px relative pb-10">
           <div className="card grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
             {pillars.map(({ icon: Icon, title, text }) => (
               <div key={title} className="flex gap-4">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent">
+                <span className="icon-box">
                   <Icon size={20} />
                 </span>
                 <div>
-                  <h3 className="text-sm font-semibold">{title}</h3>
+                  {/* Es una etiqueta, no un título: un h3 aquí saltaría del h1 sin pasar por un h2 */}
+                  <p className="text-sm font-semibold">{title}</p>
                   <p className="mt-1 text-sm text-muted">{text}</p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Servicios */}
-      <section className="container-px mt-20" id="servicios">
+      {/* Franja con tinte menta: rompe el fondo plano; sus bordes se deshacen en pixeles */}
+      <div className="relative mt-16">
+        <BordePixel lado="arriba" />
+        <div className="bg-banda py-16 md:py-20">
+      <Reveal as="section" className="container-px" id="servicios">
         <SectionHeader
           eyebrow="Servicios"
           title="Soluciones digitales hechas"
@@ -93,12 +126,38 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
+        </div>
+        <BordePixel lado="abajo" />
+      </div>
 
       <CtaBand />
 
+      {/* El estudio: versión corta de /nosotros, para que se vea quién está detrás */}
+      <Reveal as="section" className="container-px mt-24">
+        <div className="grid items-center gap-10 md:grid-cols-[2fr_3fr] md:gap-16">
+          <div className="relative mx-auto w-full max-w-[18rem]">
+            <EsquinaPixel esquina="bl" className="absolute -bottom-12 -left-12" />
+            <FotoFundador className="relative" />
+          </div>
+          <div>
+            <p className="eyebrow">El estudio</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+              Un estudio pequeño, <span className="text-accent">a propósito</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-muted">
+              Sin intermediarios ni cuentas que pasan de mano en mano: quien escucha tu idea es quien la diseña, la
+              programa y la publica. Por eso cada proyecto tiene criterio y nadie se pierde en el camino.
+            </p>
+            <Link to="/nosotros" className="btn-ghost mt-8">
+              Conóceme <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </Reveal>
+
       {/* Portafolio */}
-      <section className="container-px mt-24">
+      <Reveal as="section" className="container-px mt-24">
         <SectionHeader
           eyebrow="Portafolio"
           title="Proyectos que"
@@ -111,7 +170,28 @@ export default function Home() {
             Ver más proyectos <ArrowUpRight size={16} />
           </Link>
         </div>
-      </section>
+      </Reveal>
+
+      {/* Retos: el contenido de redes, conectado con la web */}
+      <div className="relative mt-24 py-4">
+        <div aria-hidden className="puntos-centro pointer-events-none absolute inset-0" />
+      <Reveal as="section" className="container-px relative">
+        <SectionHeader
+          eyebrow="Retos"
+          title="Una temática al azar,"
+          highlight="una landing nueva"
+          description="Así practico en público: sale una temática al azar y diseño y programo una landing para ella. Cada reto que publico en redes llena una casilla."
+        />
+        <div className="mt-10">
+          <MuroRetos minimo={6} />
+        </div>
+        <div className="mt-6 text-center">
+          <Link to="/retos" className="btn-ghost">
+            Ver todos los retos <ArrowUpRight size={16} />
+          </Link>
+        </div>
+      </Reveal>
+      </div>
 
       <Testimonials />
     </>

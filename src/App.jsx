@@ -6,6 +6,7 @@ import Portfolio from './pages/Portfolio'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
+import Retos from './pages/Retos'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="servicios" element={<Services />} />
         <Route path="portafolio" element={<Portfolio />} />
+        <Route path="retos" element={<Retos />} />
         <Route path="nosotros" element={<About />} />
         <Route path="contacto" element={<Contact />} />
         <Route path="privacidad" element={<Privacy />} />
