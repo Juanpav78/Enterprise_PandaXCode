@@ -10,6 +10,7 @@ import HeroVisual from '../components/HeroVisual'
 import FirmaPixel from '../components/FirmaPixel'
 import TitularAnimado from '../components/TitularAnimado'
 import Reveal from '../components/Reveal'
+import FotoFundador from '../components/FotoFundador'
 
 // Opciones que se barajaron para el titular:
 //  - "Tu negocio merece una web que se recuerde."
@@ -121,6 +122,26 @@ export default function Home() {
       </Reveal>
 
       <CtaBand />
+
+      {/* El estudio: versión corta de /nosotros, para que se vea quién está detrás */}
+      <Reveal as="section" className="container-px mt-24">
+        <div className="grid items-center gap-10 md:grid-cols-[2fr_3fr] md:gap-16">
+          <FotoFundador className="mx-auto w-full max-w-[18rem]" />
+          <div>
+            <p className="eyebrow">El estudio</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+              Un estudio pequeño, <span className="text-accent">a propósito</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-muted">
+              Sin intermediarios ni cuentas que pasan de mano en mano: quien escucha tu idea es quien la diseña, la
+              programa y la publica. Por eso cada proyecto tiene criterio y nadie se pierde en el camino.
+            </p>
+            <Link to="/nosotros" className="btn-ghost mt-8">
+              Conóceme <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </Reveal>
 
       {/* Portafolio */}
       <Reveal as="section" className="container-px mt-24">

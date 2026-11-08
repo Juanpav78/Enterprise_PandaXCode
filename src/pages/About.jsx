@@ -2,7 +2,13 @@ import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import SectionHeader from '../components/SectionHeader'
 import CtaBand from '../components/CtaBand'
-import NosotrosVisual from '../components/NosotrosVisual'
+import FotoFundador from '../components/FotoFundador'
+import ProcesoPasos from '../components/ProcesoPasos'
+
+// TODO: 3–4 líneas de historia personal en primera persona (quién eres, por qué empezaste,
+// qué te importa al construir una web). Cada elemento es un párrafo; mientras esté vacío
+// no se muestra nada inventado y sólo queda la presentación del estudio.
+const historia = []
 
 const values = [
   { title: 'Cercanía', text: 'Hablas directamente con quien diseña y desarrolla tu proyecto.' },
@@ -14,11 +20,18 @@ export default function About() {
   return (
     <>
       <Seo title="Nosotros" description="Conoce quién está detrás de PandaX Code." />
-      <Reveal as="section" className="container-px grid items-center gap-12 pt-20 md:grid-cols-2">
+      <Reveal as="section" className="container-px grid items-center gap-12 pt-20 md:grid-cols-[5fr_7fr] md:gap-16">
+        <FotoFundador className="mx-auto w-full max-w-sm md:order-none" />
         <div>
-          <SectionHeader eyebrow="Nosotros" title="Detrás de" highlight="PandaX Code" center={false} />
-          {/* Cuenta aquí tu historia: quién eres, por qué empezaste y cómo trabajas */}
-          <p className="mt-6 text-muted">
+          <SectionHeader eyebrow="Sobre mí" title="Detrás de" highlight="PandaX Code" center={false} />
+          <p className="mt-6 text-lg text-ink/90">
+            Soy <span className="font-semibold">Juan Alvarado</span>, diseñador y desarrollador web. PandaX Code es mi
+            estudio: cuando trabajas con nosotros, trabajas directamente conmigo.
+          </p>
+          {historia.map((parrafo) => (
+            <p key={parrafo} className="mt-4 text-muted">{parrafo}</p>
+          ))}
+          <p className="mt-4 text-muted">
             Somos un estudio de diseño y desarrollo web enfocado en ayudar a negocios y emprendedores a tener una
             presencia digital profesional. Combinamos diseño estratégico con tecnología moderna para crear sitios que
             se ven bien, cargan rápido y generan resultados.
@@ -28,7 +41,6 @@ export default function About() {
             publicación y el mantenimiento.
           </p>
         </div>
-        <NosotrosVisual />
       </Reveal>
 
       <Reveal as="section" className="container-px mt-20 grid gap-5 md:grid-cols-3">
@@ -38,6 +50,11 @@ export default function About() {
             <p className="mt-2 text-sm text-muted">{v.text}</p>
           </div>
         ))}
+      </Reveal>
+
+      <Reveal as="section" className="container-px mt-24">
+        <SectionHeader eyebrow="Proceso" title="Cómo" highlight="trabajo" />
+        <ProcesoPasos />
       </Reveal>
 
       <CtaBand />
