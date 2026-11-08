@@ -42,6 +42,8 @@ export const api = {
 
   getTestimonials: () => request(`${endpoints.testimonials}${buildQuery({ site: config.site })}`),
 
+  getRetos: () => request(endpoints.retos),
+
   sendContact: (data) =>
     request(endpoints.contact, {
       method: 'POST',

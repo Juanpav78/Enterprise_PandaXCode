@@ -1,5 +1,6 @@
 import { ArrowUpRight, Play, Shuffle } from 'lucide-react'
-import { retos, GENERADOR_URL } from '../data/retos'
+import { api } from '../api/client'
+import { useApi } from '../hooks/useApi'
 import { config } from '../config'
 import PandaPixel from './PandaPixel'
 import Reveal from './Reveal'
@@ -13,6 +14,10 @@ const ALTURAS = [
 
 const dos = (n) => String(n).padStart(2, '0')
 
+// Las miniaturas vienen de Cloudinary: se piden al ancho de una columna del muro
+const optimizada = (url) =>
+  url?.includes('/upload/') ? url.replace('/upload/', '/upload/f_auto,q_auto,c_limit,w_600/') : url
+
 // Etiqueta en pixel (Silkscreen): el único lugar de la web donde el pixel art tiene presencia
 const EtiquetaPixel = ({ children, apagada = false }) => (
   <span
@@ -25,7 +30,16 @@ const EtiquetaPixel = ({ children, apagada = false }) => (
 const TarjetaReto = ({ reto }) => (
   <article className="card overflow-hidden">
     {reto.imagen ? (
-      <img src={reto.imagen} alt={`Landing del reto #${dos(reto.numero)}: ${reto.tematica}`} loading="lazy" className="w-full" />
+      // ancho/alto vienen de la API: el navegador reserva el hueco antes de que cargue la
+      // imagen y el muro no se reacomoda a saltos mientras van llegando
+      <img
+        src={optimizada(reto.imagen)}
+        alt={`Landing del reto #${dos(reto.numero)}: ${reto.tematica}`}
+        width={reto.ancho || undefined}
+        height={reto.alto || undefined}
+        loading="lazy"
+        className="h-auto w-full"
+      />
     ) : (
       <div aria-hidden className="grid h-40 place-items-center border-b border-line">
         <PandaPixel size={56} />
@@ -60,12 +74,15 @@ const CasillaVacia = ({ numero, altura, conMascota }) => (
 )
 
 /**
- * Muro de retos. Muestra los publicados y completa con casillas vacías hasta `minimo`,
+ * Muro de retos. Los retos se cargan desde el admin (API /retos): cada uno publicado ocupa
+ * una casilla. Muestra los publicados y completa con casillas vacías hasta `minimo`,
  * así el tablero se ve con intención desde el primer día y se va llenando con cada reto.
  * Con el mínimo ya superado queda siempre una casilla libre: el "próximo reto".
  */
 export default function MuroRetos({ minimo = 6 }) {
-  const publicados = retos.filter((r) => r.listo).sort((a, b) => b.numero - a.numero)
+  // Sin respaldo local: si la API no responde, el muro se queda con sus casillas vacías
+  const { data, loading } = useApi(api.getRetos, [])
+  const publicados = loading ? [] : [...(data || [])].sort((a, b) => b.numero - a.numero)
   const siguiente = publicados.reduce((max, r) => Math.max(max, r.numero), 0) + 1
   const vacias = Math.max(minimo - publicados.length, 1)
 
@@ -73,11 +90,11 @@ export default function MuroRetos({ minimo = 6 }) {
     <>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p className="font-pixel text-sm text-muted">
-          RETOS COMPLETADOS: <span className="text-accent">{dos(publicados.length)}</span>
+          RETOS COMPLETADOS: <span className="text-accent">{loading ? '--' : dos(publicados.length)}</span>
         </p>
         <div className="flex flex-wrap gap-3">
-          {GENERADOR_URL && (
-            <a href={GENERADOR_URL} target="_blank" rel="noreferrer" className="btn-primary py-2!">
+          {config.generadorUrl && (
+            <a href={config.generadorUrl} target="_blank" rel="noreferrer" className="btn-primary py-2!">
               <Shuffle size={16} /> Generar una temática
             </a>
           )}
@@ -92,7 +109,7 @@ export default function MuroRetos({ minimo = 6 }) {
       {/* Columnas CSS: cada tarjeta conserva su alto y el muro se acomoda como un tablero */}
       <div className="mt-8 columns-2 gap-3 sm:gap-4 lg:columns-3">
         {publicados.map((reto, i) => (
-          <Reveal key={reto.numero} delay={(i % 6) * 60} className="mb-3 break-inside-avoid sm:mb-4">
+          <Reveal key={reto._id || reto.numero} delay={(i % 6) * 60} className="mb-3 break-inside-avoid sm:mb-4">
             <TarjetaReto reto={reto} />
           </Reveal>
         ))}

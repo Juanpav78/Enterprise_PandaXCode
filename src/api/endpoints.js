@@ -5,5 +5,6 @@ export const endpoints = {
   projects: '/projects', // GET  ?site=code&featured=true&limit=3
   project: (slug) => `/projects/${slug}`, // GET
   testimonials: '/testimonials', // GET  ?site=code
+  retos: '/retos', // GET  sólo los publicados, del más reciente al más antiguo
   contact: '/contact', // POST { name, email, phone, company, service, budget, message, site }
 }
