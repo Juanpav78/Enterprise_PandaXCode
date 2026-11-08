@@ -1,5 +1,7 @@
 // Plugin de Vite para lo que los buscadores y las redes necesitan con URL absoluta:
-//  - etiquetas para compartir (og:image, og:url, twitter:card y canonical) en index.html
+//  - etiquetas para compartir (og:image y twitter:card) en index.html. El canonical y og:url
+//    los pone cada página (src/components/Seo.jsx): en una SPA todas las rutas sirven este mismo
+//    index.html y un canonical fijo apuntaría siempre a la portada
 //  - robots.txt y sitemap.xml generados al compilar
 // Todo depende de VITE_SITE_URL (p. ej. https://midominio.com). Si no está definida, sólo se
 // genera un robots.txt sin sitemap: una URL relativa no le sirve ni a Google ni a WhatsApp.
@@ -17,13 +19,11 @@ export default function seo({ rutas = ['/'], imagen = '/og-image.jpg', bloquear 
       if (!sitio) return []
       const meta = (atributos) => ({ tag: 'meta', attrs: atributos, injectTo: 'head' })
       return [
-        meta({ property: 'og:url', content: `${sitio}/` }),
         meta({ property: 'og:image', content: `${sitio}${imagen}` }),
         meta({ property: 'og:image:width', content: '1200' }),
         meta({ property: 'og:image:height', content: '630' }),
         meta({ name: 'twitter:card', content: 'summary_large_image' }),
         meta({ name: 'twitter:image', content: `${sitio}${imagen}` }),
-        { tag: 'link', attrs: { rel: 'canonical', href: `${sitio}/` }, injectTo: 'head' },
       ]
     },
 
