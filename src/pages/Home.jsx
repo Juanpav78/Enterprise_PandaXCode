@@ -11,6 +11,7 @@ import FirmaPixel from '../components/FirmaPixel'
 import TitularAnimado from '../components/TitularAnimado'
 import Reveal from '../components/Reveal'
 import FotoFundador from '../components/FotoFundador'
+import MuroRetos from '../components/MuroRetos'
 
 // Opciones que se barajaron para el titular:
 //  - "Tu negocio merece una web que se recuerde."
@@ -155,6 +156,24 @@ export default function Home() {
         <div className="mt-10 text-center">
           <Link to="/portafolio" className="btn-ghost">
             Ver más proyectos <ArrowUpRight size={16} />
+          </Link>
+        </div>
+      </Reveal>
+
+      {/* Retos: el contenido de redes, conectado con la web */}
+      <Reveal as="section" className="container-px mt-24">
+        <SectionHeader
+          eyebrow="Retos"
+          title="Una landing, una temática al azar,"
+          highlight="contrarreloj"
+          description="Así practico en público: sale una temática al azar y diseño y programo una landing contra el reloj. Cada reto que publico en redes llena una casilla."
+        />
+        <div className="mt-10">
+          <MuroRetos minimo={6} />
+        </div>
+        <div className="mt-6 text-center">
+          <Link to="/retos" className="btn-ghost">
+            Ver todos los retos <ArrowUpRight size={16} />
           </Link>
         </div>
       </Reveal>

@@ -6,6 +6,8 @@ export const config = {
   email: import.meta.env.VITE_EMAIL || 'contacto@tudominio.com',
   instagram: import.meta.env.VITE_INSTAGRAM || 'https://www.instagram.com/pandaxcode/',
   youtube: import.meta.env.VITE_YOUTUBE || 'https://www.youtube.com/@pandaxcode9228',
+  // TODO: URL del perfil de TikTok (VITE_TIKTOK). Vacía: el enlace no se muestra
+  tiktok: import.meta.env.VITE_TIKTOK || '',
   // Vacío mientras la tienda no exista: la barra superior con el enlace no se muestra
   tiendaUrl: import.meta.env.VITE_TIENDA_URL && import.meta.env.VITE_TIENDA_URL !== '#' ? import.meta.env.VITE_TIENDA_URL : '',
   brand: 'PandaX Code',
