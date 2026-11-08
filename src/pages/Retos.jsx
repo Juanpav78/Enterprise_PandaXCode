@@ -9,14 +9,15 @@ export default function Retos() {
     <>
       <Seo
         title="Retos"
-        description="Una landing, una temática al azar, contrarreloj. Los retos de PandaX Code en Instagram, TikTok y YouTube."
+        description="Una temática al azar, una landing nueva. Los retos de PandaX Code en Instagram, TikTok y YouTube."
       />
-      <Reveal as="section" className="container-px pt-20">
+      <Reveal as="section" className="container-px relative pt-20">
+        <div aria-hidden className="puntos-centro pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px]" />
         <SectionHeader
           eyebrow="Retos"
-          title="Una landing, una temática al azar,"
-          highlight="contrarreloj"
-          description="Sale una temática al azar, corre el reloj y diseño y programo una landing completa. Lo grabo y lo publico en redes; cada reto nuevo ocupa una casilla de este muro."
+          title="Una temática al azar,"
+          highlight="una landing nueva"
+          description="Sale una temática al azar y diseño y programo una landing completa para ella. Lo grabo y lo publico en redes; cada reto nuevo ocupa una casilla de este muro."
           center={false}
         />
         <div className="mt-10">

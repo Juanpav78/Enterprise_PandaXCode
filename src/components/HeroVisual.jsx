@@ -39,8 +39,9 @@ function useEscritorio() {
 }
 
 // Pantalla de relleno cuando aún no hay portadas: un sitio esquemático con el color de marca
-const PantallaVacia = ({ compacta = false }) => (
-  <div className="flex h-full flex-col gap-3 bg-surface p-4">
+// Mientras la API responde, la misma pantalla late como esqueleto de carga.
+const PantallaVacia = ({ compacta = false, cargando = false }) => (
+  <div className={`flex h-full flex-col gap-3 bg-surface p-4 ${cargando ? 'esqueleto' : ''}`}>
     <div className="h-2.5 w-1/3 rounded-sm bg-ink/15" />
     <div className={`${compacta ? 'h-16' : 'h-24'} rounded-sm bg-menta-soft`} />
     <div className="grid grid-cols-3 gap-2">
@@ -53,7 +54,7 @@ const PantallaVacia = ({ compacta = false }) => (
 
 // Muestra la portada activa con un fundido entre una y otra. Sólo se montan las que pueden
 // llegar a verse: en móvil, únicamente la primera.
-const Pantalla = ({ portadas, activa, ancho, alt, compacta }) =>
+const Pantalla = ({ portadas, activa, ancho, alt, compacta, cargando }) =>
   portadas.length ? (
     <div className="relative h-full">
       {portadas.map((src, i) => (
@@ -68,14 +69,16 @@ const Pantalla = ({ portadas, activa, ancho, alt, compacta }) =>
       ))}
     </div>
   ) : (
-    <PantallaVacia compacta={compacta} />
+    <PantallaVacia compacta={compacta} cargando={cargando} />
   )
 
 export default function HeroVisual() {
   const propia = useImagenPropia()
   const escritorio = useEscritorio()
-  const { data } = useApi(() => api.getProjects({ featured: 'true', limit: 3 }), fallbackProjects)
-  const todos = (data || []).filter((p) => projectCover(p)).slice(0, 3)
+  const { data, loading } = useApi(() => api.getProjects({ featured: 'true', limit: 3 }), fallbackProjects)
+  // Mientras carga no se muestran los datos de respaldo (que no tienen capturas), sino el esqueleto.
+  // Con la API de Render en plan gratis, la primera respuesta puede tardar si estaba dormida.
+  const todos = loading ? [] : (data || []).filter((p) => projectCover(p)).slice(0, 3)
   const proyectos = escritorio ? todos : todos.slice(0, 1)
   const portadas = proyectos.map(projectCover)
   const [activa, setActiva] = useState(0)
@@ -127,7 +130,7 @@ export default function HeroVisual() {
             </span>
           </div>
           <div className="aspect-[16/10] bg-surface">
-            <Pantalla portadas={portadas} activa={actual} ancho={1000} alt={proyecto ? `Proyecto ${proyecto.title}` : ''} />
+            <Pantalla portadas={portadas} activa={actual} ancho={1000} alt={proyecto ? `Proyecto ${proyecto.title}` : ''} cargando={loading} />
           </div>
         </div>
 
@@ -135,12 +138,18 @@ export default function HeroVisual() {
         <div className="absolute right-0 bottom-0 w-[26%] min-w-24 rounded-md border border-line bg-bg p-1.5 shadow-2xl shadow-black/70">
           <div className="mx-auto mb-1 h-1 w-8 bg-ink/20" />
           <div className="aspect-[9/19] overflow-hidden rounded-sm bg-surface">
-            <Pantalla portadas={capturasMoviles} activa={movilActual} ancho={400} alt="" compacta />
+            <Pantalla portadas={capturasMoviles} activa={movilActual} ancho={400} alt="" compacta cargando={loading} />
           </div>
         </div>
       </div>
 
-      {/* Nombre del proyecto activo, debajo del mockup */}
+      {/* Nombre del proyecto activo, debajo del mockup (o su esqueleto mientras carga) */}
+      {loading && (
+        <div className="esqueleto mt-4 flex items-center gap-3" aria-hidden>
+          <span className="h-2 w-2 bg-line" />
+          <span className="h-2.5 w-32 rounded-sm bg-line" />
+        </div>
+      )}
       {proyecto && (
         <figcaption className="mt-4 flex items-center gap-3 font-mono text-xs text-muted">
           <span className="h-2 w-2 bg-accent" aria-hidden />

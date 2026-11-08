@@ -6,6 +6,18 @@ import { idOf } from '../utils/format'
 import ProjectCard from './ProjectCard'
 import ProjectModal from './ProjectModal'
 
+// Tarjeta vacía con la forma de ProjectCard mientras llegan los proyectos de la API, en lugar
+// de enseñar por un momento los datos de respaldo
+const TarjetaEsqueleto = () => (
+  <div className="card esqueleto overflow-hidden" aria-hidden>
+    <div className="aspect-[16/10] border-b border-line bg-bg" />
+    <div className="space-y-2.5 p-5">
+      <div className="h-2.5 w-20 rounded-sm bg-line" />
+      <div className="h-4 w-36 rounded-sm bg-line" />
+    </div>
+  </div>
+)
+
 /**
  * Lista de proyectos con filtro por categoría y modal de detalle.
  * - limit: cuántos mostrar (en el inicio, 3)
@@ -46,10 +58,10 @@ export default function ProjectsGrid({ limit, featured = false, filters = false 
         </div>
       )}
 
-      <div className={`mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${loading ? 'opacity-70' : ''}`}>
-        {visible.map((p) => (
-          <ProjectCard key={idOf(p)} project={p} onOpen={setSelected} />
-        ))}
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-busy={loading}>
+        {loading
+          ? Array.from({ length: limit || 3 }, (_, i) => <TarjetaEsqueleto key={i} />)
+          : visible.map((p) => <ProjectCard key={idOf(p)} project={p} onOpen={setSelected} />)}
       </div>
 
       {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}

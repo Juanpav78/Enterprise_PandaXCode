@@ -12,6 +12,7 @@ import TitularAnimado from '../components/TitularAnimado'
 import Reveal from '../components/Reveal'
 import FotoFundador from '../components/FotoFundador'
 import MuroRetos from '../components/MuroRetos'
+import { BordePixel, EsquinaPixel } from '../components/Pixeles'
 
 // Opciones que se barajaron para el titular:
 //  - "Tu negocio merece una web que se recuerde."
@@ -101,7 +102,11 @@ export default function Home() {
       </section>
 
       {/* Servicios */}
-      <Reveal as="section" className="container-px mt-20" id="servicios">
+      {/* Franja con tinte menta: rompe el fondo plano; sus bordes se deshacen en pixeles */}
+      <div className="relative mt-16">
+        <BordePixel lado="arriba" />
+        <div className="bg-banda py-16 md:py-20">
+      <Reveal as="section" className="container-px" id="servicios">
         <SectionHeader
           eyebrow="Servicios"
           title="Soluciones digitales hechas"
@@ -122,13 +127,19 @@ export default function Home() {
           ))}
         </div>
       </Reveal>
+        </div>
+        <BordePixel lado="abajo" />
+      </div>
 
       <CtaBand />
 
       {/* El estudio: versión corta de /nosotros, para que se vea quién está detrás */}
       <Reveal as="section" className="container-px mt-24">
         <div className="grid items-center gap-10 md:grid-cols-[2fr_3fr] md:gap-16">
-          <FotoFundador className="mx-auto w-full max-w-[18rem]" />
+          <div className="relative mx-auto w-full max-w-[18rem]">
+            <EsquinaPixel esquina="bl" className="absolute -bottom-12 -left-12" />
+            <FotoFundador className="relative" />
+          </div>
           <div>
             <p className="eyebrow">El estudio</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
@@ -162,12 +173,14 @@ export default function Home() {
       </Reveal>
 
       {/* Retos: el contenido de redes, conectado con la web */}
-      <Reveal as="section" className="container-px mt-24">
+      <div className="relative mt-24 py-4">
+        <div aria-hidden className="puntos-centro pointer-events-none absolute inset-0" />
+      <Reveal as="section" className="container-px relative">
         <SectionHeader
           eyebrow="Retos"
-          title="Una landing, una temática al azar,"
-          highlight="contrarreloj"
-          description="Así practico en público: sale una temática al azar y diseño y programo una landing contra el reloj. Cada reto que publico en redes llena una casilla."
+          title="Una temática al azar,"
+          highlight="una landing nueva"
+          description="Así practico en público: sale una temática al azar y diseño y programo una landing para ella. Cada reto que publico en redes llena una casilla."
         />
         <div className="mt-10">
           <MuroRetos minimo={6} />
@@ -178,6 +191,7 @@ export default function Home() {
           </Link>
         </div>
       </Reveal>
+      </div>
 
       <Testimonials />
     </>

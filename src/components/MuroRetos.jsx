@@ -1,4 +1,4 @@
-import { ArrowUpRight, Play, Shuffle, Timer } from 'lucide-react'
+import { ArrowUpRight, Play, Shuffle } from 'lucide-react'
 import { retos, GENERADOR_URL } from '../data/retos'
 import { config } from '../config'
 import PandaPixel from './PandaPixel'
@@ -34,11 +34,6 @@ const TarjetaReto = ({ reto }) => (
     <div className="p-4">
       <EtiquetaPixel>RETO #{dos(reto.numero)}</EtiquetaPixel>
       <h3 className="mt-3 font-semibold leading-snug">{reto.tematica}</h3>
-      {reto.tiempo && (
-        <p className="mt-2 flex items-center gap-1.5 font-mono text-xs text-muted">
-          <Timer size={13} className="text-accent" /> {reto.tiempo}
-        </p>
-      )}
       <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-medium">
         {reto.video && (
           <a href={reto.video} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-accent hover:underline">
