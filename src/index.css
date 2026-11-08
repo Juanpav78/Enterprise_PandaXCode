@@ -136,6 +136,65 @@ h1, h2, h3 {
   transform: none;
 }
 
+/* ---------- Hero ---------- */
+/* Cuadrícula de puntos menta muy tenue que se desvanece hacia los bordes */
+.hero-puntos {
+  background-image: radial-gradient(circle at center, rgb(46 196 160 / 0.08) 1.2px, transparent 1.6px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 70% 65% at 60% 40%, black 30%, transparent 75%);
+}
+@media (max-width: 767px) {
+  .hero-puntos { opacity: 0.6; }
+}
+
+/* Titular palabra por palabra: cada palabra recibe su retraso desde React (--i) */
+@keyframes palabra-entra {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.palabra {
+  display: inline-block;
+  opacity: 0;
+  animation: palabra-entra 0.5s var(--ease-salida) forwards;
+  animation-delay: calc(var(--i) * 60ms);
+}
+/* Subrayado de la palabra destacada: se dibuja de izquierda a derecha cuando ya entró */
+.palabra-destacada {
+  position: relative;
+}
+.palabra-destacada::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.02em;
+  height: 0.09em;
+  background: var(--menta);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: subrayar 0.6s var(--ease-salida) forwards;
+  animation-delay: calc(var(--i) * 60ms + 350ms);
+}
+@keyframes subrayar {
+  to { transform: scaleX(1); }
+}
+
+/* Firma pixel: los cuadrados que deshacen el borde del bloque aparecen en cascada */
+@keyframes pixel-entra {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: none; }
+}
+.pixel {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pixel-entra 0.35s var(--ease-salida) forwards;
+}
+/* En móvil sólo se dibuja un tercio de los cuadrados */
+@media (max-width: 767px) {
+  .pixel-extra { display: none; }
+}
+
 /* ---------- Ilustración de "Nosotros" (NosotrosVisual) ---------- */
 .nv-rejilla {
   background-image:
