@@ -29,7 +29,7 @@ export default function ProjectCard({ project, onOpen }) {
       type="button"
       onClick={() => onOpen(project)}
       onMouseEnter={medir}
-      className="card group relative block w-full overflow-hidden text-left transition-transform duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1"
+      className="card cursor-pointer group relative block w-full overflow-hidden text-left transition-transform duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1"
       style={{ '--sobrante': `-${sobrante}px`, '--recorrido': `${Math.max(sobrante / PX_POR_SEGUNDO, 0.3)}s` }}
     >
       <span aria-hidden className="pointer-events-none absolute -inset-px z-10 rounded-md border border-accent/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />

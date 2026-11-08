@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
-// TODO: subir la foto real a public/img/fundador.jpg (vertical, ~800×1000 px).
-// Mientras no exista se muestra el monograma, así la sección nunca enseña una imagen rota.
-const FOTO = '/img/fundador.jpg'
+// WebP de 800px (≈70 KB): el marco se muestra a ~384px como máximo, así que cubre pantallas
+// retina. Si se cambia la foto, conviene exportarla igual en vez de subir el original pesado.
+const FOTO = '/img/fundador.webp'
+const ANCHO = 800
+const ALTO = 977
 
 // Esquina superior derecha recortada en 3 escalones de 8px: el guiño pixel de la marca
 const ESQUINA_PIXEL =
@@ -20,6 +22,8 @@ export default function FotoFundador({ className = '' }) {
           <img
             src={FOTO}
             alt="Juan Alvarado, fundador de PandaX Code"
+            width={ANCHO}
+            height={ALTO}
             loading="lazy"
             onError={() => setHayFoto(false)}
             className="h-full w-full object-cover"
