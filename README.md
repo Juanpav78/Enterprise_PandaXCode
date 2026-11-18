@@ -1,6 +1,28 @@
-# PandaX Code · Frontend (React + Vite)
+# 🐼 PandaX Code — sitio web
 
-Web de la empresa PandaX Code. Consume la **API compartida** (la misma del portafolio y del admin).
+> Sitio de PandaX Code, mi marca de diseño y desarrollo web: servicios, portafolio, retos y formulario de contacto.
+>
+> 🔗 **[pandaxcode.com](https://pandaxcode.com)**
+
+![React](https://img.shields.io/badge/React_18-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=reactrouter&logoColor=white)
+![Express](https://img.shields.io/badge/API-Express_%2B_MongoDB-000000?style=flat&logo=express&logoColor=white)
+
+**Lo que demuestra este proyecto:** un frontend desacoplado que consume una API compartida con mi portafolio, con datos de respaldo si la API no responde, SEO por página con react-helmet-async, rutas SPA en Netlify y una sola fuente de contenido para varios sitios gracias al filtro `site`.
+
+## ✨ Secciones
+
+- **Inicio** con titular animado, servicios, proyectos destacados, proceso de trabajo y testimonios
+- **Servicios** con precios desde la API
+- **Portafolio** con modal de detalle por proyecto
+- **Retos**: una landing nueva por cada temática al azar
+- **Nosotros**, **Contacto** (con botón de WhatsApp) y **Política de privacidad**
+
+## 📖 Detalles técnicos
+
+Consume la **API compartida** (la misma del portafolio y del admin).
 Stack: React 18, Vite, React Router, Tailwind CSS v4, lucide-react, react-helmet-async.
 
 ## Arrancar
@@ -84,14 +106,6 @@ en `CORS_ORIGINS` del backend). El puerto 5173 lo usa el portafolio.
 Guárdalo en una colección `mensajes` para verlo en el admin y, si quieres, envíate un correo de aviso.
 Valida también en el backend (nombre, correo, mensaje y `consent === true`).
 
-## Pendientes antes de publicar
-
-- [x] Logo del panda en `public/logo.svg` y favicon
-- [ ] Poner la imagen del hero en `public/hero.webp` y la foto en `public/nosotros.webp`
-- [ ] Completar los datos entre `[ ]` en `src/pages/Privacy.jsx`
-- [ ] Escribir tu historia en `src/pages/About.jsx`
-- [ ] Completar el `.env` (API, WhatsApp, correo, Instagram, enlace a la tienda)
-- [ ] Cargar servicios y proyectos reales desde el admin
 
 ## Publicar en Netlify o Cloudflare Pages
 
@@ -103,3 +117,7 @@ Valida también en el backend (nombre, correo, mensaje y `consent === true`).
 > Nota SEO: al ser React con Vite (SPA), Google puede leer el contenido, pero más lento que con un sitio
 > renderizado en el servidor. Los títulos y descripciones por página ya están con `react-helmet-async`.
 > Si más adelante el posicionamiento se vuelve prioridad, migrar a Next.js es directo porque los componentes se reutilizan.
+
+---
+
+Hecho por **Juan Pablo Alvarado** · [Portafolio](https://juanpalvaradov.com) · [LinkedIn](https://www.linkedin.com/in/juanpavpandax/) · [GitHub](https://github.com/Juanpav78)
